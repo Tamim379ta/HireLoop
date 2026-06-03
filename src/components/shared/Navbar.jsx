@@ -5,8 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
 
 export default function Navbar() {
+  const { data: session, error } = authClient.useSession()
+
+  const user = session?.user
+
   const [open, setOpen] = useState(false);
 
   const navLinks = [
@@ -48,13 +53,36 @@ export default function Navbar() {
           <div className="h-5 w-[1px] bg-white/20" />
 
           {/* Auth Buttons */}
-          <Button variant="light" className="text-white">
-            Sign In
-          </Button>
+          {
+            user ? (
+              <>
+                <p>Hi {user?.name}</p>
+                <Link href="/dashboard">
+                  <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
+                    Dashboard
+                  </Button>
+                </Link>
 
-          <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
-            Get Started
-          </Button>
+                <Button onClick={async () => await authClient.signOut()} className="bg-red-600 hover:bg-red-700 text-white">
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link href="/signIn">
+                  <Button variant="light" className="text-white">
+                    Sign In
+                  </Button>
+                </Link>
+
+                <Link href="/signUp">
+                  <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
+                    Get Started
+                  </Button>
+                </Link>
+              </>
+            )
+          }
         </div>
 
         {/* Mobile Menu Button */}
@@ -81,13 +109,36 @@ export default function Navbar() {
           <div className="h-[1px] bg-white/10 my-2" />
 
           <div className="flex flex-col gap-2">
-            <Button variant="light" className="text-white w-full">
-              Sign In
-            </Button>
+            {
+              user ? (
+                <>
+                  <p>Hi {user?.name}</p>
+                  <Link href="/dashboard">
+                    <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
+                      Dashboard
+                    </Button>
+                  </Link>
+                  <Button onClick={async () => await authClient.signOut()} className="bg-red-600 hover:bg-red-700 text-white">
+                    Logout
+                  </Button>
 
-            <Button className="bg-indigo-600 text-white w-full">
-              Get Started
-            </Button>
+                </>
+              ) : (
+                <>
+                  <Link href="/signIn">
+                    <Button variant="light" className="text-white">
+                      Sign In
+                    </Button>
+                  </Link>
+
+                  <Link href="/signUp">
+                    <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
+                      Get Started
+                    </Button>
+                  </Link>
+                </>
+              )
+            }
           </div>
         </div>
       )}

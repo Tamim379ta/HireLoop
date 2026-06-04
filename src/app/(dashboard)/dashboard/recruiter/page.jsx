@@ -1,5 +1,6 @@
 "use client"
 
+import StatsBar from "@/components/dashboard/StatsBar";
 import { useSession } from "@/lib/auth-client";
 
 const RecruterHomePage =  () => {
@@ -16,7 +17,7 @@ const RecruterHomePage =  () => {
 
       <h1 className="p-5 text-3xl font font-semibold"> welcome back {user?.name}</h1>
 
-
+       <StatsBar/>
     </div>
   );
 };

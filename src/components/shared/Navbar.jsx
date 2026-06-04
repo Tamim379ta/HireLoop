@@ -57,7 +57,7 @@ export default function Navbar() {
             user ? (
               <>
                 <p>Hi {user?.name}</p>
-                <Link href="/dashboard">
+                <Link href="/dashboard/recruiter">
                   <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
                     Dashboard
                   </Button>
@@ -113,7 +113,7 @@ export default function Navbar() {
               user ? (
                 <>
                   <p>Hi {user?.name}</p>
-                  <Link href="/dashboard">
+                  <Link href="/dashboard/recruiter">
                     <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
                       Dashboard
                     </Button>

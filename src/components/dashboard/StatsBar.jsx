@@ -50,6 +50,7 @@ export default function StatsBar() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-6xl p-6 bg-[#121212]">
+    
       {stats.map((stat, index) => (
         <StatCard
           key={index}
@@ -58,6 +59,8 @@ export default function StatsBar() {
           value={stat.value}
         />
       ))}
+
+      
     </div>
   );
 }

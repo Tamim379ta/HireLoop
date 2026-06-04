@@ -21,6 +21,7 @@ import {
   FaFileLines,
   FaCloudArrowUp,
 } from "react-icons/fa6";
+import { createJob } from "@/lib/action/job";
 
 const WEB_JOB_CATEGORIES = [
   { id: "frontend", label: "Frontend Engineer" },
@@ -83,28 +84,25 @@ export default function PostJobPage() {
     const formValues = Object.fromEntries(formData.entries());
 
     const jobPayload = {
-      title: formValues.jobTitle,
-      category: formValues.jobCategory,
-      type: formValues.jobType,
-      salary: {
-        min: Number(formValues.salaryMin),
-        max: Number(formValues.salaryMax),
-        currency: formValues.currency,
-      },
+      jobTitle: formValues.jobTitle,
+      jobCategory: formValues.jobCategory,
+      jobType: formValues.jobType,
+      minSalary: formValues.salaryMin,
+      maxSalary: formValues.salaryMax,
+      currency: formValues.currency,
       location: isRemote ? "Remote" : formValues.location,
       deadline: formValues.deadline,
-      description: {
-        responsibilities: formValues.responsibilities,
-        requirements: formValues.requirements,
-        benefits: formValues.benefits || "",
-      },
+      responsibilities: formValues.responsibilities,
+      requirements: formValues.requirements,
+      benefits: formValues.benefits || "",
+      isRemote: isRemote,
       companyId: companyInfo.id,
       status: "active",
-      createdAt: new Date().toISOString(),
+      isPubliclyVisible: true,
     };
 
     try {
-      console.log("Submitting payload:", jobPayload);
+      const res = await createJob(jobPayload);
       alert("Job posted successfully!");
     } catch (error) {
       console.error(error);

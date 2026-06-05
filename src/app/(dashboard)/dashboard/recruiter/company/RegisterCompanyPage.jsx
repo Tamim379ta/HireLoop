@@ -141,7 +141,7 @@ export default function CompanyProfilePage({ recruiter, company }) {
   };
 
   // --- STATE 1: NO COMPANY REGISTERED YET VIEW ---
-  if (!companyProfile && !isRegistering) {
+  if (!companyProfile._id && !isRegistering) {
     return (
       <div className="max-w-2xl mx-auto my-16 p-8 text-center bg-zinc-950 border border-zinc-900 rounded-xl shadow-2xl space-y-6">
         <div className="mx-auto w-16 h-16 bg-zinc-900 border border-zinc-800 rounded-full flex items-center justify-center text-zinc-500">

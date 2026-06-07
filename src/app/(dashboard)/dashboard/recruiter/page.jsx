@@ -10,7 +10,7 @@ const RecruterHomePage = async () => {
   return (
     <div>
 
-      <h1 className="p-5 text-3xl font font-semibold"> welcome back {user?.name}</h1>
+      <h1 className="p-5 text-4xl  font-semibold"> welcome back {user?.name}</h1>
 
        <StatsBar/>
 

@@ -6,15 +6,7 @@ import { getUserSession } from "@/lib/core/session";
 const RecruterHomePage = async () => {
 
   const user = await getUserSession();
-  console.log("user session", user);
 
-    // const { data: session, isPending } = useSession();
-
-    // if (isPending) {
-    //     return <div>Loading...</div>
-    // }
-
-    // const user = session?.user
   return (
     <div>
 

@@ -12,9 +12,13 @@ import {
   TextField,
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 
 const SignInPage = () => {
+
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
+  const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -28,9 +32,9 @@ const SignInPage = () => {
       password,
     });
     if (user) {
-      redirect('/')
+      router.push(redirectTo);
     } else {
-      alert("faild")
+      alert("failed")
     }
   };
   return (
@@ -111,7 +115,7 @@ const SignInPage = () => {
         <div className="mt-6 text-center text-sm text-default-500">
           Don't have an account?{" "}
           <Link
-            href={"/signUp"}
+            href={`/signUp?redirect=${redirectTo}`}
             className="font-medium text-primary hover:underline"
           >
             Create Account

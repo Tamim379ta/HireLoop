@@ -13,17 +13,18 @@ import {
   RadioGroup,
   TextField,
 } from "@heroui/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 
 const SignUpPage = () => {
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
+  const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    console.log(data)
-
     const { email, password, name, role } = data;
 
     const user = await authClient.signUp.email({
@@ -33,9 +34,9 @@ const SignUpPage = () => {
       role,
     });
     if (user) {
-      redirect('/')
-    }else{
-      alert("faild")
+      router.push(redirectTo);
+    } else {
+      alert("failed")
     }
   };
 
@@ -145,7 +146,7 @@ const SignUpPage = () => {
         <div className="mt-6 text-center text-sm text-default-500">
           Already have an account?{" "}
           <Link
-            href="/signIn"
+            href={`/signIn?redirect=${redirectTo}`}
             className="font-medium text-primary hover:underline"
           >
             Sign In

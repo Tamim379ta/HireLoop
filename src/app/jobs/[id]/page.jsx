@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { IoLocationOutline } from "react-icons/io5";
 import { FiBriefcase, FiDollarSign, FiClock, FiArrowUpRight, FiStar } from "react-icons/fi";
 import { getJobById } from "@/lib/api/jobs";
@@ -97,9 +98,9 @@ const JobPage = async ({ params }) => {
             <button className="px-4 py-2 text-sm border border-zinc-700 rounded-xl hover:bg-zinc-800 transition-colors">
               Save job
             </button>
-            <button className="px-5 py-2 text-sm bg-blue-600 hover:bg-blue-500 rounded-xl font-medium transition-colors flex items-center gap-1.5">
+            <Link href={`/jobs/${job._id}/apply`} className="px-5 py-2 text-sm bg-blue-600 hover:bg-blue-500 rounded-xl font-medium transition-colors flex items-center gap-1.5">
               Apply now <FiArrowUpRight />
-            </button>
+            </Link>
           </div>
         </div>
 

@@ -114,7 +114,7 @@ const ApplicationPage = async () => {
 
                       {/* Status */}
                       <Table.Cell className="py-4">
-                        <StatusBadge status={app.status ?? 'applied'} />
+                        <StatusBadge status={app.status} />
                       </Table.Cell>
 
                       {/* Action */}

@@ -53,7 +53,7 @@ export default function PostJobForm({ company }) {
     name: company.companyName,
     id: company._id,
     companyLogo: company.logo,
-    isApproved: company.isApproved || true,
+    isApproved: company.status === "Approved",
   });
 
   const [isRemote, setIsRemote] = useState(false);

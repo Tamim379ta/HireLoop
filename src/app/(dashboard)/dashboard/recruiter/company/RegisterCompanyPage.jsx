@@ -125,6 +125,7 @@ export default function CompanyProfilePage({ recruiter, company }) {
       employeeCountRange: matchedRange,
       briefDescription: formValues.briefDescription,
       logo: logoUrl || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150",
+      status: company && company.status ? company.status : 'pending',
       recruiterId: recruiter.id,
     };
    setCompanyProfile(companyPayload);
@@ -132,6 +133,8 @@ export default function CompanyProfilePage({ recruiter, company }) {
       setIsRegistering(false);
 
       const res = await createCompany(companyPayload);
+      const saveCompany = {...companyPayload, _id: res.insertedId}
+      setCompanyProfile(saveCompany)
       alert("Company details registered successfully!");
     } catch (error) {
       console.error(error);

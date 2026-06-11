@@ -3,11 +3,29 @@
 import React from "react";
 import { Card, Button, TextField, Label, Input, FieldError } from "@heroui/react";
 import { FiSend } from "react-icons/fi";
+import { createApplication } from "@/lib/action/application";
 
 const JobApply = ({ job, applicant }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    const submissionData = {
+      ...data,
+      jobId: job._id,
+      JobTitle: job.jobTitle,
+      jobCompany: job.companyName,
+      joblogo: job.companyLogo,
+      applicantId: applicant.id,
+      applicantName: applicant.name,
+      applicantEmail: applicant.email,
+      status: 'applied'
+
+    };
+
+    const result = createApplication(submissionData);
+ };
 
   return (
     <div className="min-h-screen bg-zinc-950 px-4 py-12">

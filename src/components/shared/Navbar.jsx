@@ -20,6 +20,15 @@ export default function Navbar() {
     { name: "Pricing", href: "/pricing" },
   ];
 
+  const dashboardLink = {
+    seeker: '/dashboard/seeker',
+    recruiter: '/dashboard/recruiter'
+  }
+  if(user?.email) {
+    navLinks.push(
+    { name: "Dashboard", href: dashboardLink[user?.role || 'seeker']  }
+    )
+  }
   return (
     <header className="w-full bg-[#0f0f0f] text-white border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -56,12 +65,8 @@ export default function Navbar() {
           {
             user ? (
               <>
-                <p>Hi {user?.name}</p>
-                <Link href="/dashboard/recruiter">
-                  <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
-                    Dashboard
-                  </Button>
-                </Link>
+                <p>Hi, {user?.name}</p>
+               
 
                 <Button onClick={async () => await authClient.signOut()} className="bg-red-600 hover:bg-red-700 text-white">
                   Logout
@@ -112,12 +117,8 @@ export default function Navbar() {
             {
               user ? (
                 <>
-                  <p>Hi {user?.name}</p>
-                  <Link href="/dashboard/recruiter">
-                    <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
-                      Dashboard
-                    </Button>
-                  </Link>
+                  <p>Hi, {user?.name}</p>
+                 
                   <Button onClick={async () => await authClient.signOut()} className="bg-red-600 hover:bg-red-700 text-white">
                     Logout
                   </Button>

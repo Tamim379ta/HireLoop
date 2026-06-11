@@ -26,12 +26,14 @@ const SignUpPage = () => {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
     const { email, password, name, role } = data;
+    const plan = role === "seeker" ? "seeker_free" : "recruiter_free";
 
     const user = await authClient.signUp.email({
       email,
       password,
       name,
       role,
+      plan
     });
     if (user) {
       router.push(redirectTo);
